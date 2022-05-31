@@ -89,8 +89,6 @@ class Search():
                     else:
                         email = name.split("@")[0] + "@gmail.com"
                         pair = (f"{links} : {email}")
-                        print(email)
-                        holder.append(pair)
         return holder
         
 if __name__ == "__main__":
