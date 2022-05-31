@@ -41,14 +41,21 @@
     .container h1
     {
       color:  cyan;
-      padding-left: 20px;
+      padding-left: 1.2rem;
     }
 
+    .container h2
+    {
+      color:  cyan;
+      padding-left: 20px;
+      font-size: 1.1rem;
+    }
     .container p
     {
       color: white;
       padding-left:20px;
       overflow: auto;
+      size: .9rem;
     }
     .searchBar{
       height: 20%;
@@ -97,14 +104,36 @@
     .holder
     {
       background-color: black;
-      height: 750px;
+      height: 730px;
 	    width: 900px;
       border: 2px solid cyan;
       margin-left: 0%;
       margin-right: 5%;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: auto;
 
+    }
+    .dataHolder{
+      border: 2px solid cyan;
+      height: auto;
+      width: 95%;
+      border-radius: 10px;
+      color: white;
+      font-size: .1rem;
+      margin-left: 20px;
+      padding-left: 20px;
+    }
+    .holder li{
+      border-radius: 2px;
+      padding: 5px;
+      color: white;
+      font-size: .9rem;
+      padding-left: 20px;
+
+    }
+    .holder a{
+      color: cyan;
+      text-decoration: none;
     }
     </style>
 </head>
@@ -114,16 +143,26 @@
 	<div class="container">
     <div class="searchBar">
       <form action="{{url_for('home')}}" method="post">
-        <input type="text" name="query" placeholder="query string..">
+        <input type="text" name="query" placeholder="query string ...">
       </form>
     </div>
     <div class="holder">
       <h1>Data</h1>
-    
-      {%for data in data%}
-      <p>
-        {{data}}
-      </p>
+      {%for data in listData%}
+        <h2>
+          {{data["Name"]}}
+        </h2>
+        <p>
+          Link  : <a href="{{data['Link']}}">{{data["Link"]}}</a><br>
+          Email : {{data["Email"]}}
+        </p>
+        <ul class="dataHolder">
+          {%for item in data["Details"]%}
+          <li>
+            {{item.split(":")[0]}} : <a href="':'.join(item.split(':')[1:])">{{":".join(item.split(":")[1:])}}</a><br>
+          </li>
+          {%endfor%}
+        </ul>
       {%endfor%}
     </div>
   </div>
