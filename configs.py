@@ -44,13 +44,13 @@ class Config:
         chrome_prefs["profile.default_content_settings"] = {"images": 2}
         chrome_prefs["profile.managed_default_content_settings"] = {"images": 2} 
         option.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        option.add_argument("--headless")
         option.add_argument("window-size=1920x1480")
         option.add_argument("disable-dev-shm-usage")
         chromeOptions.add_argument("--disable-blink-features=AutomationControlled")
-        driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), chrome_options=option)
+        driver = webdriver.Chrome(chrome_options=option)
         return driver
 
 if __name__ == "__main__":
     gleam = Config()
     gleam.ChromeSetUp(use_proxy=False, user_agent=None)
-        
