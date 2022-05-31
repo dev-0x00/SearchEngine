@@ -44,12 +44,10 @@ class Config:
         chrome_prefs["profile.default_content_settings"] = {"images": 2}
         chrome_prefs["profile.managed_default_content_settings"] = {"images": 2} 
         option.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        option.add_argument("--incognito")
-        option.add_experimental_option("excludeSwitches", ["enable-automation"])
-        chromeOptions.add_experimental_option('useAutomationExtension', False)
-        option.add_argument("--headless")
+        option.add_argument("window-size=1920x1480")
+        option.add_argument("disable-dev-shm-usage")
         chromeOptions.add_argument("--disable-blink-features=AutomationControlled")
-        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=option)
+        driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), chrome_options=option)
         return driver
 
 if __name__ == "__main__":
