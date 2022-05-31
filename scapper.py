@@ -19,6 +19,7 @@ class Search():
     def GetLinkTree(self, igLink):
         data = []
         self.driver.get(igLink)
+
         try:
             WebDriverWait(self.driver, 5).until(Ec.presence_of_element_located((By.NAME, "username"))).send_keys("ftudios.digital")
             self.driver.find_element(By.NAME, "password").send_keys("21dreamstudio")
@@ -33,6 +34,7 @@ class Search():
                         text = items.find_element(By.CLASS_NAME, "sc-hKgILt.Button__StyledText-sc-uh5tyw-0.kVCYxL.rsIfq").get_attribute("innerHTML")
                         data.append(f"{text} : {link}")
                     break
+
         except TimeoutException:
             try:
                 self.driver.get(igLink)
@@ -44,7 +46,9 @@ class Search():
                             text = items.find_element(By.CLASS_NAME, "sc-hKgILt.Button__StyledText-sc-uh5tyw-0.kVCYxL.rsIfq").get_attribute("innerHTML")
                             data.append(f"{text} : {link}")
                         break
+
             except NoSuchElementException:
+                print("error occured")
                 pass
         
         return data
@@ -55,8 +59,8 @@ class Search():
         try:
             self.driver.get("https://www.google.com")
             self.driver.maximize_window()
-            time.sleep(10)
-            WebDriverWait(self.driver, 60).until(Ec.presence_of_all_elements_located((By.TAG_NAME, "input")))[0].send_keys(searchName)
+            time.sleep(5)
+            WebDriverWait(self.driver, 30).until(Ec.presence_of_all_elements_located((By.TAG_NAME, "input")))[0].send_keys(searchName)
             time.sleep(2)
             WebDriverWait(self.driver, 5).until(Ec.presence_of_all_elements_located((By.TAG_NAME, "input")))[3].click()
             time.sleep(2)
@@ -89,9 +93,10 @@ class Search():
                     else:
                         email = name.split("@")[0] + "@gmail.com"
                         pair = (f"{links} : {email}")
+                        holder.append(pair)
         return holder
         
 if __name__ == "__main__":
     serch = Search()
-    serch.GetDataLinks('model los angeles "linktr.ee/" @gmail.com site:instagram.com')
-    #serch.GetLinkTree("https://www.instagram.com/thesydneymartin/")
+    #serch.GetDataLinks('model los angeles "linktr.ee/" @gmail.com site:instagram.com')
+    serch.GetLinkTree("https://www.instagram.com/thesydneymartin/")

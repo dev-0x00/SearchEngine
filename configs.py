@@ -45,7 +45,7 @@ class Config:
         #option.experimental_options["prefs"] = chrome_prefs
         chrome_prefs["profile.default_content_settings"] = {"images": 2}
         chrome_prefs["profile.managed_default_content_settings"] = {"images": 2} 
-        service = Service("/home/dev/personalProjects/upwork/wolf/coins/chromedriver")
+        service = Service("./chromedriver")
         #option.add_argument("--proxy-server=http://p.webshare.io:9999")
         option.add_argument("--incognito")
         option.add_experimental_option("excludeSwitches", ["enable-automation"])
