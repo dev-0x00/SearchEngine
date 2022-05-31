@@ -48,7 +48,7 @@ class Config:
         option.add_argument("window-size=1920x1480")
         option.add_argument("disable-dev-shm-usage")
         chromeOptions.add_argument("--disable-blink-features=AutomationControlled")
-        driver = webdriver.Chrome(chrome_options=option)
+        driver = webdriver.Chrome("./chromedriver", chrome_options=option)
         return driver
 
 if __name__ == "__main__":
